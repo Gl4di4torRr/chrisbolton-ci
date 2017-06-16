@@ -1,0 +1,24 @@
+resources:
+  - name: chrisbolton
+    type: git
+    source:
+      uri: https://github.com/Gl4di4torRr/chrisbolton.git
+      branch: master
+      username: {{USERNAME}}
+      password: {{PASSWORD}}
+  - name: ci
+    type: git
+    source:
+      uri: https://github.com/Gl4di4torRr/chrisbolton-ci.git
+      branch: master
+      username: {{USERNAME}}
+      password: {{PASSWORD}}
+
+jobs:
+  - name: build-project
+    plan:
+      - get: chrisbolton
+        trigger: true
+      - get: ci
+      - task: build
+        file: ci/tasks/build-project.yml
